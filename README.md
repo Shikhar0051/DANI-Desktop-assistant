@@ -30,6 +30,10 @@ Just install a few liablities and get started!!
 for downloading liablities..
 <div class="highlight highlight-source-shell"><pre>pip install -r requirements.txt</pre></div>
 
+
+<b> I have used selenium for automation of the web browser. please download the suitable chrome Drivers and create path in windows. </b>
+
+
 and here you go... 
 <div class="highlight highlight-source-shell"><pre>python DANI.py</pre></div>
 
