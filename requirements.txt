@@ -1,0 +1,4 @@
+pyttsx3==2.90 
+selenium==3.141.0
+wikipedia
+SpeechRecognition==3.8.1
