@@ -40,18 +40,69 @@ def takeCommand():
 
     return query
 
+def youtube():
+    speak("Launching youtube")
+    driver = webdriver.Chrome()
+    driver.get("https://www.youtube.com")
+    driver.maximize_window()
+    while True:
+        query = takeCommand().lower()
+        if 'close' in query or 'exit' in query:
+            driver.quit()
+            speak("returning to old tasks")
+            break
+
+        elif 'search' in query:
+            query = query.replace("search","")
+            inputEle = driver.find_element_by_css_selector('input[name=search_query]')
+            inputEle.send_keys(query)
+            inputEle.send_keys(Keys.ENTER)
+
+        elif 'new tab' in query:
+            new_tab(driver)
+            
+        elif 'open' in query:
+            new_links(driver,query)
+
+
+def google():
+    speak("Launching Google")
+    driver = webdriver.Chrome()
+    driver.get("https://www.google.com")
+    driver.maximize_window()
+    page = "a"
+    while True:
+        query = takeCommand().lower()
+        if 'close' in query or 'exit' in query:
+            driver.quit()
+            speak("returning to old tasks")
+            break
+                    
+        elif 'search' in query:
+            query = query.replace("search","")
+            inputEle = driver.find_element_by_css_selector('input[name=q]')
+            inputEle.send_keys(query)
+            inputEle.send_keys(Keys.ENTER)
+
+        elif 'new tab' in query:
+            new_tab(driver)
+            total_tabs += 1
+
+        elif 'open' in query:
+            new_links(driver,query)
 
 def new_tab(driver):
+    speak("opening new tab...")
     driver.execute_script("window.open('');")
     driver.switch_to.window(driver.window_handles[-1])
 
-def new_links(driver):
+def new_links(driver,query):
     query = query.replace("open", "")
     if 'youtube' in query:
-        driver.get("https://youtube.com")
-
+        youtube()
+        
     elif 'google' in query:
-        driver.get("https://google.com")
+        google()
 
     elif 'stackoverflow' in query:
         driver.get("https://stackoverflow.com")
@@ -97,57 +148,11 @@ if __name__ == "__main__":
         #opening youtube and searching
         elif 'open youtube' in query:
             #webbrowser.get(chromedir).open("youtube.com")
-            speak("Launching youtube")
-            driver = webdriver.Chrome()
-            driver.get("https://www.youtube.com")
-            driver.maximize_window()
-            while True:
-                query = takeCommand().lower()
-                if 'close' in query or 'exit' in query:
-                    driver.quit()
-                    speak("returning to old tasks")
-                    break
-
-                elif 'search' in query:
-                    query = query.replace("search","")
-                    inputEle = driver.find_element_by_css_selector('input[name=search_query]')
-                    inputEle.send_keys(query)
-                    inputEle.send_keys(Keys.ENTER)
-
-                elif 'new tab' in query:
-                    new_tab(driver)
-                    total_tabs += 1
-
-                elif 'open' in query:
-                    new_links(driver)
-
+            youtube()
+            
         #searching on google       
         elif 'google' in query:
-            speak("Launching Google")
-            driver = webdriver.Chrome()
-            driver.get("https://www.google.com")
-            driver.maximize_window()
-            total_tabs = 1
-            page = "a"
-            while True:
-                query = takeCommand().lower()
-                if 'close' in query or 'exit' in query:
-                    driver.quit()
-                    speak("returning to old tasks")
-                    break
-                    
-                elif 'search' in query:
-                    query = query.replace("search","")
-                    inputEle = driver.find_element_by_css_selector('input[name=q]')
-                    inputEle.send_keys(query)
-                    inputEle.send_keys(Keys.ENTER)
-
-                elif 'new tab' in query:
-                    new_tab(driver)
-                    total_tabs += 1
-
-                elif 'open' in query:
-                    new_links(driver)
+            google()
 
         elif 'time' in query:
             Time()
