@@ -1,4 +1,4 @@
-<center><h1>DANI desktop assistant cum Web Browser automator</h1></center>
+<center><h1>DANI desktop assistant cum Web Browser automator v1.2</h1></center>
 
 <p> NOTE***   some python IDEs do not support speech_recognition module and the microsoft's SAPI5 so better to use Python IDLE if wish to update. </p>
 
