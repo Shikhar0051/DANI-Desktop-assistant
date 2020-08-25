@@ -86,15 +86,60 @@ def google():
 
         elif 'new tab' in query:
             new_tab(driver)
-            total_tabs += 1
 
         elif 'open' in query:
             new_links(driver,query)
 
+def gmail(driver):
+    while True:
+        query = takeCommand().lower()
+        if 'new tab' in query:
+            new_tab(driver)
+        elif 'search' in query:
+            query = query.replace('search',"")
+            inputEle = driver.find_element_by_css_selector('input[name = q]')
+            inputEle.send_keys(query)
+            inputEle.send_keys(Keys.ENTER)
+        
+        elif 'inbox' in query:
+            driver.find_element_by_link_text('Inbox').click()
+
+        elif 'starred' in query:
+            driver.find_element_by_link_text('Starred').click()
+
+        elif 'sent' in query:
+            driver.find_element_by_link_text('Sent').click()
+
+        elif 'drafts' in query:
+            driver.find_element_by_link_text('Drafts').click()
+
+        elif 'compose' in query:
+            driver.find_element_by_css_selector(".aic .z0 div").click()
+
+        elif 'sign in' in query:
+            driver.find_element_by_link_text('Sign in').click()
+            while True:
+                speak('enter email id')
+                query = takeCommand().lower()
+                inputEle = driver.find_element_by_css_selector('input[name = identifier]')
+                inputEle.send_keys(query)
+                speak('Should i proceed')
+                if 'yes' in query:
+                    inputEle.send_keys(Keys.ENTER)
+                    break
+                else:
+                    query = ""
+                    inputEle.send_keys(query)
+            speak("Please type password in the given field")
+            
+        
 def new_tab(driver):
     speak("opening new tab...")
     driver.execute_script("window.open('');")
     driver.switch_to.window(driver.window_handles[-1])
+
+def switch_tab(driver):
+    pass
 
 def new_links(driver,query):
     query = query.replace("open", "")
@@ -112,6 +157,7 @@ def new_links(driver,query):
 
     elif 'gmail' in query:
         driver.get("https://gmail.com")
+        gmail(driver)
 
     elif 'rediffmail' in query:
         driver.get("https://rediffmail.com")
