@@ -37,4 +37,4 @@ for downloading libraries..
 and there you go... 
 <div class="highlight highlight-source-shell"><pre>python DANI.py</pre></div>
 
-<p><b> Pull Requests are always welcome. Make sure you add proper comments comments. </b></p>
+<p><b> Pull Requests are always welcome. Make sure you add proper comments. </b></p>
