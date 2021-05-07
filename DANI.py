@@ -7,7 +7,6 @@ import datetime
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-#print(voices[0].id) 
 engine.setProperty('voice',voices[0].id) #id 0 is female voice in my system
 
 # for speaking 
@@ -138,8 +137,6 @@ def new_tab(driver):
     driver.execute_script("window.open('');")
     driver.switch_to.window(driver.window_handles[-1])
 
-def switch_tab(driver):
-    pass
 
 def new_links(driver,query):
     query = query.replace("open", "")
